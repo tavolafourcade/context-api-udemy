@@ -3,7 +3,7 @@ import { ThemeContext } from '../context/ThemeProvider'
 
 const Navbar = () => {
     //Accesing to ThemeContext
-    const {theme, setTheme} = useContext(ThemeContext)
+    const {theme, cambioColor} = useContext(ThemeContext)
 
     return (
         <div style=
@@ -17,12 +17,12 @@ const Navbar = () => {
         <label htmlFor="">Color Texto</label>
         <input
         type='color'
-        onChange={e=>setTheme({...theme, color: e.target.value})}/>
+        onChange={e=>cambioColor({...theme, color: e.target.value})}/>
         
         <label htmlFor="">Color Fondo</label>
         <input
         type='color'
-        onChange={e=>setTheme({...theme, background: e.target.value})}/>
+        onChange={e=>cambioColor({...theme, background: e.target.value})}/>
     </div>
     )
 }

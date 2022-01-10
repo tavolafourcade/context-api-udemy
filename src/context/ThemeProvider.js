@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 
 // Context creation
 export const ThemeContext = createContext()
@@ -9,8 +9,22 @@ const ThemeProvider = (props) => {
         background: '#eee'
     }
     const [theme, setTheme] = useState(themes)
+
+    // Saving themes in localStorage
+    useEffect(() => {
+        if(localStorage.getItem('themeLocal')){
+            const themeLocal = JSON.parse(localStorage.getItem('themeLocal'))
+            setTheme(themeLocal)
+        }
+    }, [])
+
+    const cambioColor = value => {
+        setTheme(value)
+        // Saving color changes in the localStorage
+        localStorage.setItem('themeLocal', JSON.stringify(value))
+    }
     return (
-        <ThemeContext.Provider value={{theme, setTheme}}>
+        <ThemeContext.Provider value={{theme, cambioColor}}>
             {props.children}
         </ThemeContext.Provider>
     )
